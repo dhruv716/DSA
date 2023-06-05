@@ -1,24 +1,21 @@
-# Consider telephone book database of N clients. Make use of a hash table implementation to quickly look up client’s telephone number. Make use of two collision handling techniques and compare them using number of comparisons required to find a set of telephone numbers.
-
-#Linear Probing
-import array as hashtable   #Using Array 
+import array as hashtable 
 size=int(input("Enter Size of telephone book Entries:"))
 
 
-hashtable=hashtable.array('i',[-1]*size) #Creating Array
+hashtable=hashtable.array('i',[-1]*size)
 
 
-#Display the hashtable '-1' indicates empty
+
 def display():
     for i in range (0,size):
-        print("Index[",i,"]=",hashtable[i],"\n")
+        print("Index[",i,"]=",hashtable[i],"\n") #'-1' indicates empty
        
 def insert():
-    #Used List to take multiple input at a time
+  
     list = input("Enter 8 digit number to insert in Telephone book:  ")
     list = list.split() #splited each value by split()
     
-    for num in list: #for loop for converting list values into integer
+    for num in list:
         num = int(num)
         choice=0
         print("Which Collision Handling Technique do you want to use?")
@@ -38,7 +35,7 @@ def insert():
                         return
                     i = (i + 1) % size
                 print("Hashtable Overflow")
-   #Hashtable get full no empty slot remaining
+
         #Quadratic Probing
         elif(choice==2):       
             key = num % size
@@ -60,7 +57,6 @@ def insert():
             print("Enter Valid Input")
 
 
-#Deleting No from the hashtable
 def delete():
      num=int(input("Enter number to delete from Telephone Book:"))
      for i in range (0,size):
@@ -68,7 +64,6 @@ def delete():
          hashtable[i]=-1
 
 
-#search element from Hashtable
 def search():
     num = int(input("Enter number to search from telephone book:"))
     key = num % size
