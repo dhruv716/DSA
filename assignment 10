@@ -1,0 +1,57 @@
+Consider a scenario for Hospital to cater services to different kinds of patients as Serious
+(top priority), b) non-serious (medium priority), c) General Checkup (Least priority).
+Implement the priority queue to cater services to the patients.
+
+
+#include <iostream>
+#include <queue>
+using namespace std;
+struct Patient {
+    string name;
+    int priority;
+    Patient(const string& n, int p) : name(n), priority(p) {}
+};
+struct ComparePatients {
+    bool operator()(const Patient& p1, const Patient& p2) {
+        return p1.priority > p2.priority; 
+    }
+};
+int main() {
+    priority_queue<Patient, vector<Patient>, ComparePatients> patientQueue;
+    int numPatients;
+    cout << "Enter the number of patients: ";
+    cin >> numPatients;
+    cin.ignore(); 
+    for (int i = 0; i < numPatients; i++) {
+        string name;
+        int priority;
+        cout << "Enter name of patient " << i+1 << ": ";
+        getline(cin, name);
+        cout << "Enter priority of patient " << i+1 << ": ";
+        cin >> priority;
+        cin.ignore(); // Ignore the newline character in the input buffer
+        patientQueue.push(Patient(name, priority));
+    }
+    while (!patientQueue.empty()) {
+        Patient patient = patientQueue.top();
+        patientQueue.pop();
+        cout << "Serving patient: " << patient.name << " (Priority: " << patient.priority << ")" << endl;
+    }
+    return 0;
+}
+
+
+Output:
+Enter the number of patients: 4
+Enter name of patient 1: nikhil
+Enter priority of patient 1: 1
+Enter name of patient 2: dhruv
+Enter priority of patient 2: 2
+Enter name of patient 3: atharva
+Enter priority of patient 3: 3
+Enter name of patient 4: ayush
+Enter priority of patient 4: 1
+Serving patient: nikhil(Priority: 1)
+Serving patient: ayush (Priority: 1)
+Serving patient: dhruv(Priority: 2)
+Serving patient: atharva(Priority: 3)
